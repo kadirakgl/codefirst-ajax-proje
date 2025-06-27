@@ -1,0 +1,41 @@
+@model BlogApp.Models.Post
+@{
+    ViewData["Title"] = "Blog Detay";
+    var isAdmin = User.IsInRole("admin");
+}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow p-4 mb-4">
+                <h2 class="fw-bold">@Model.Title</h2>
+                <p class="text-muted">@Model.CreatedAt.ToString("dd.MM.yyyy HH:mm")</p>
+                <hr />
+                <div class="mb-3" style="white-space: pre-line;">@Model.Content</div>
+                <div class="d-flex gap-2 mb-2">
+                    <a href="@Url.Action("Index", "Post")" class="btn btn-outline-secondary btn-sm">Tüm Bloglar</a>
+                    @if (isAdmin)
+                    {
+                        <a href="@Url.Action("Edit", "Post", new { id = Model.Id })" class="btn btn-outline-warning btn-sm">Düzenle</a>
+                        <form asp-action="Delete" asp-route-id="@Model.Id" method="post" class="d-inline">
+                            <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('Silmek istediğinize emin misiniz?');">Sil</button>
+                        </form>
+                    }
+                </div>
+            </div>
+            <div class="card shadow p-4">
+                <h4 class="mb-3">Yorumlar</h4>
+                <div id="commentList">
+                    @await Html.PartialAsync("~/Views/Comment/_CommentListPartial.cshtml", Model.Comments)
+                    @if (User.Identity.IsAuthenticated && !isAdmin)
+                    {
+                        @await Html.PartialAsync("~/Views/Comment/_AddCommentPartial.cshtml", Model.Id)
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/comment-ajax.js"></script>
+} 

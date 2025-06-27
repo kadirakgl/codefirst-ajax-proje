@@ -1,0 +1,10 @@
+@model int
+<form id="addCommentForm" data-post-id="@Model">
+    <div class="mb-2">
+        <input type="text" name="author" class="form-control" placeholder="Adınız" required />
+    </div>
+    <div class="mb-2">
+        <textarea name="text" class="form-control" placeholder="Yorumunuz" rows="2" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary btn-sm">Yorum Ekle</button>
+</form> 

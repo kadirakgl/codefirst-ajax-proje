@@ -1,0 +1,29 @@
+@{
+    ViewData["Title"] = "Giriş Seçimi";
+}
+<style>
+    body {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
+        background-image: url('/img/blog-bg.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+    .login-card {
+        background: rgba(255,255,255,0.95);
+        border-radius: 18px;
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+        min-width: 340px;
+        max-width: 400px;
+    }
+</style>
+<div class="container d-flex flex-column align-items-center justify-content-center" style="height: 80vh;">
+    <div class="login-card card shadow p-4">
+        <h2 class="mb-4 text-center fw-bold" style="letter-spacing:1px;">BlogApp Giriş</h2>
+        <div class="d-grid gap-3">
+            <a href="@Url.Action("UserLogin", "Account")" class="btn btn-primary btn-lg">Kullanıcı Girişi</a>
+            <a href="@Url.Action("AdminLogin", "Account")" class="btn btn-dark btn-lg">Admin Girişi</a>
+        </div>
+    </div>
+</div> 

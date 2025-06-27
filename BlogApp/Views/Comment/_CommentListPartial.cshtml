@@ -1,0 +1,26 @@
+@model List<BlogApp.Models.Comment>
+@{
+    var isAdmin = User.IsInRole("admin");
+}
+@if (Model == null || !Model.Any())
+{
+    <p>Henüz yorum yok.</p>
+}
+else
+{
+    <ul class="list-group">
+        @foreach (var comment in Model)
+        {
+            <li class="list-group-item d-flex justify-content-between align-items-center mb-3">
+                <div>
+                    <strong>@comment.Author</strong> <span class="text-muted" style="font-size:12px">@comment.CreatedAt.ToString("dd.MM.yyyy HH:mm")</span>
+                    <div>@comment.Text</div>
+                </div>
+                @if (isAdmin)
+                {
+                    <button class="btn btn-danger btn-sm delete-comment" data-id="@comment.Id">Sil</button>
+                }
+            </li>
+        }
+    </ul>
+} 
